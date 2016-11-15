@@ -7,7 +7,7 @@ public class CountWays
 {
     public static void main(String args[])
     {
-        int n = 7;
+        int n = 5;
         int[] map = new int[n+1];
         for(int i=0; i<=n; i++)
             map[i] = -1;
@@ -20,19 +20,27 @@ public class CountWays
 
     public static int countCoinWays(int n, int[] map, ArrayList<Integer> seq)
     {
-        if(n<0)
+      if(n<0){
+      	seq.remove(seq.get(seq.size()-1));
+        
             return 0;
+      }
         else if(n==0)
         {
-            System.out.println(seq.toString());
+          
+        
+            System.out.println(seq.toString());  seq.clear();
             return 1;
         }
         else if(map[n]>-1)
         {
+         
             return map[n];
         }
         else
+         
         {
+         
             map[n] = countCoinWays(n-1, map, appendToSeq(seq,1)) + countCoinWays(n-5, map, appendToSeq(seq,5))
                     + countCoinWays(n-10, map, appendToSeq(seq,10))  + countCoinWays(n-25, map, appendToSeq(seq,25)) ;//currently it is calculating the order
             return map[n];
